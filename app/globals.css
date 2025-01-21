@@ -351,23 +351,26 @@ a:hover {
   overflow: visible;
 }
 
-.timeline-line::before {
-  content: '';
-  position: absolute;
-  top: 24px;
-  left: 50%;
-  width: 4px;
-  height: calc(100% - 48px);
-  background: linear-gradient(180deg,
-    rgba(99, 102, 241, 0.9) 0%,
-    rgba(99, 102, 241, 0.7) 50%,
-    rgba(99, 102, 241, 0.4) 100%
-  );
-  transform: translateX(-50%);
-  border-radius: 4px;
-  box-shadow:
-    0 0 20px rgba(99, 102, 241, 0.3),
-    0 0 40px rgba(99, 102, 241, 0.1);
+/* Only show timeline line on desktop */
+@media (min-width: 640px) {
+  .timeline-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg,
+      rgba(99, 102, 241, 0.9) 0%,
+      rgba(99, 102, 241, 0.7) 50%,
+      rgba(99, 102, 241, 0.4) 100%
+    );
+    transform: translateX(-50%);
+    border-radius: 4px;
+    box-shadow:
+      0 0 20px rgba(99, 102, 241, 0.3),
+      0 0 40px rgba(99, 102, 241, 0.1);
+  }
 }
 
 .timeline-indicator {
@@ -402,25 +405,9 @@ a:hover {
   );
 }
 
-/* Line connecting to card - left side */
-.timeline-indicator-left::after {
-  right: 12px;
-  transform: translateY(-50%);
-}
-
-/* Line connecting to card - right side */
-.timeline-indicator-right::after {
-  left: 12px;
-  transform: translateY(-50%);
-}
-
-@keyframes pulse-dot {
-  0%, 100% { transform: scale(1); opacity: 0.4; }
-  50% { transform: scale(1.5); opacity: 0.2; }
-}
-
 .timeline-card {
   position: relative;
+  width: 100%;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(99, 102, 241, 0.2);
@@ -461,4 +448,9 @@ a:hover {
   background: rgba(99, 102, 241, 0.2);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.5); opacity: 0.2; }
 }

@@ -326,70 +326,38 @@ export default function Home() {
           <div className="relative space-y-8">
             <div className="timeline-line">
               {timeline.map((item, index) => (
-                <div key={item.title} className="flex items-center gap-8">
-                  {/* Left side */}
-                  <div className="w-1/2 flex flex-col items-end">
-                    {index % 2 === 1 && (
-                      <div className="timeline-card w-full max-w-xl rounded-xl p-6 shadow-lg">
-                        <div className="flex items-center justify-between mb-4">
-                          <h3 className="text-xl font-semibold bg-gradient-to-r from-indigo-500 to-indigo-300 bg-clip-text text-transparent">
-                            {item.title}
-                          </h3>
-                          <span className="timeline-period text-sm font-medium text-gray-400">
-                            {item.period}
-                          </span>
+                <div key={item.title} className="mb-8 sm:mb-0">
+                  {/* Desktop layout */}
+                  <div className="hidden sm:flex items-center gap-8">
+                    {/* Left side */}
+                    <div className="w-1/2 flex flex-col items-end">
+                      {index % 2 === 1 && (
+                        <div className="timeline-card w-full max-w-xl rounded-xl p-6 shadow-lg">
+                          <TimelineContent item={item} />
                         </div>
-                        <h4 className="text-lg font-medium text-gray-300 mb-2">{item.company}</h4>
-                        <p className="text-gray-400 mb-4">{item.description}</p>
-                        {item.technologies && item.technologies.length > 0 && (
-                          <div className="flex flex-wrap gap-2">
-                            {item.technologies.map((tech) => (
-                              <span
-                                key={tech}
-                                className="px-3 py-1 text-sm font-medium text-indigo-300 bg-indigo-500/10 rounded-full"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    )}
+                      )}
+                    </div>
+
+                    {/* Timeline indicator */}
+                    <div className="relative flex items-center">
+                      <div className="timeline-indicator" />
+                    </div>
+
+                    {/* Right side */}
+                    <div className="w-1/2 flex flex-col items-start">
+                      {index % 2 === 0 && (
+                        <div className="timeline-card w-full max-w-xl rounded-xl p-6 shadow-lg">
+                          <TimelineContent item={item} />
+                        </div>
+                      )}
+                    </div>
                   </div>
 
-                  {/* Timeline indicator */}
-                  <div className="relative flex items-center">
-                    <div className="timeline-indicator" />
-                  </div>
-
-                  {/* Right side */}
-                  <div className="w-1/2 flex flex-col items-start">
-                    {index % 2 === 0 && (
-                      <div className="timeline-card w-full max-w-xl rounded-xl p-6 shadow-lg">
-                        <div className="flex items-center justify-between mb-4">
-                          <h3 className="text-xl font-semibold bg-gradient-to-r from-indigo-500 to-indigo-300 bg-clip-text text-transparent">
-                            {item.title}
-                          </h3>
-                          <span className="timeline-period text-sm font-medium text-gray-400">
-                            {item.period}
-                          </span>
-                        </div>
-                        <h4 className="text-lg font-medium text-gray-300 mb-2">{item.company}</h4>
-                        <p className="text-gray-400 mb-4">{item.description}</p>
-                        {item.technologies && item.technologies.length > 0 && (
-                          <div className="flex flex-wrap gap-2">
-                            {item.technologies.map((tech) => (
-                              <span
-                                key={tech}
-                                className="px-3 py-1 text-sm font-medium text-indigo-300 bg-indigo-500/10 rounded-full"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    )}
+                  {/* Mobile layout */}
+                  <div className="block sm:hidden">
+                    <div className="timeline-card w-full rounded-xl p-6 shadow-lg">
+                      <TimelineContent item={item} />
+                    </div>
                   </div>
                 </div>
               ))}
@@ -518,3 +486,31 @@ export default function Home() {
     </main>
   );
 }
+
+// Add TimelineContent component for reusability
+const TimelineContent = ({ item }: { item: TimelineItem }) => (
+  <>
+    <div className="flex items-center justify-between mb-4">
+      <h3 className="text-xl font-semibold bg-gradient-to-r from-indigo-500 to-indigo-300 bg-clip-text text-transparent">
+        {item.title}
+      </h3>
+      <span className="timeline-period text-sm font-medium text-gray-400">
+        {item.period}
+      </span>
+    </div>
+    <h4 className="text-lg font-medium text-gray-300 mb-2">{item.company}</h4>
+    <p className="text-gray-400 mb-4">{item.description}</p>
+    {item.technologies && item.technologies.length > 0 && (
+      <div className="flex flex-wrap gap-2">
+        {item.technologies.map((tech) => (
+          <span
+            key={tech}
+            className="px-3 py-1 text-sm font-medium text-indigo-300 bg-indigo-500/10 rounded-full"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+    )}
+  </>
+)
