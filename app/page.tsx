@@ -23,6 +23,15 @@ interface TimelineItem {
   technologies?: string[];
 }
 
+interface WritingItem {
+  title: string;
+  description: string;
+  date: string;
+  readTime: string;
+  link: string;
+  topics: string[];
+}
+
 const greetings = [
   { text: "Hello", lang: "English" },
   { text: "Hej", lang: "Danish" },
@@ -122,6 +131,18 @@ const timeline: TimelineItem[] = [
       "Problem Solving"
     ]
   }
+];
+
+const writings: WritingItem[] = [
+  {
+    title: "Deploying NextJs Application on Window’s IIS Server",
+    description: "Learn how to host a Next.js app on Windows IIS using iisnode and URL Rewrite. The article covers setting up server.js and web.config, updating package.json, and resolving deployment challenges to create a private, locally-hosted application.",
+    date: "Mar 2024",
+    readTime: "5 min read",
+    link: "https://medium.com/@patrick.jakobsen/deploying-nextjs-application-on-windows-iis-server-60793f416eb1",
+    topics: ["NestJS", "TypeScript", "IIS", "Web Development"]
+  },
+  // Add more articles as you write them
 ];
 
 export default function Home() {
@@ -388,6 +409,8 @@ export default function Home() {
         </motion.div>
       </section>
 
+
+
       {/* Projects Section */}
       {projects.length > 0 && (
       <section className="relative py-16 sm:py-24 md:py-32">
@@ -464,6 +487,84 @@ export default function Home() {
             ))}
           </div>
         </motion.div>
+        </section>
+      )}
+
+       {/* Writing Section */}
+       {writings.length > 0 && (
+        <section className="relative py-16 sm:py-24">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+            }}
+            className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
+          >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 sm:mb-16 text-center text-gradient">
+              Writing
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {writings.map((article) => (
+                <motion.div
+                  key={article.title}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 }
+                  }}
+                  className="group"
+                >
+                  <Link
+                    href={article.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <div className="timeline-card rounded-xl p-6 h-full flex flex-col">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-sm text-gray-400">{article.date}</span>
+                        <span className="text-sm text-gray-400">{article.readTime}</span>
+                      </div>
+                      <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-indigo-400 transition-colors">
+                        {article.title}
+                      </h3>
+                      <p className="text-gray-400 mb-4 flex-grow">
+                        {article.description}
+                      </p>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {article.topics.map((topic) => (
+                          <span
+                            key={topic}
+                            className="px-3 py-1 text-sm font-medium text-indigo-300 bg-indigo-500/10 rounded-full"
+                          >
+                            {topic}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="flex items-center text-indigo-400 group-hover:text-indigo-300 transition-colors">
+                        <span>Read article</span>
+                        <svg
+                          className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </section>
       )}
 
