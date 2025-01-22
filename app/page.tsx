@@ -62,7 +62,29 @@ const techStack = {
   ],
 };
 
-const projects: Project[] = [];
+const projects: Project[] = [
+    {
+        title: "My Movie Mate",
+        description: "My Movie Mate is a movie and tv shows app that allows you to search for movies and tv shows and get detailed information about them. You can also add them to your watchlist, mark them as watched, get notifications when a new season is released and more.",
+        tech: ["Swift", "SwiftUI", "UIKit", "CoreLocation", "Git"],
+        link: "https://mymoviemate.xyz",
+        image: "/mymoviemate.png"
+    },
+    {
+        title: "PJToolKit",
+        description: "PJToolKit was a cli tool that i made to help my self with some basic setup off discord bots. It was made to give a good experience when setting up a discord bot. With some default commands you could add to your bot and more features.",
+        tech: ["TypeScript", "JavaScript", "Git", "Discord.js", "Node.js", "NPM"],
+        link: "https://github.com/Pallepadehat/PJToolKit",
+        image: "/pjtoolkit.png"
+    },
+    {
+        title: "MealHub",
+        description: "MealHub was a school project where we had to make a website that helps people find recipes, add it to their shopping list. But we took it a step further and added a chatbot that helps you find recipes and add it to your shopping list.",
+        tech: ["TypeScript", "Git", "NextJS", "AppWrite", "TailwindCSS", "Shadcn", "React"],
+        link: "https://github.com/Pallepadehat/MealHub",
+        image: "/mealhub.png"
+    }
+];
 
 const timeline: TimelineItem[] = [
   {
