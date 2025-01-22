@@ -104,7 +104,7 @@ const timeline: TimelineItem[] = [
     technologies: ["TypeScript", "JavaScript", "Vue3", "PHP", "Laravel", "Git", "Flutter", "React Native"]
   },
   {
-    title: "Programming Technician Student with specialization in Programming",
+    title: "Programming Technician Student",
     company: "ZBC Ringsted",
     period: "2022 - 2027",
     description: "Studying as a Data Technician with specialization in Programming (Datatekniker med speciale i programmering). Learning comprehensive software development, from fundamental programming concepts to advanced system architecture.",
@@ -137,7 +137,7 @@ const writings: WritingItem[] = [
   {
     title: "Deploying NextJs Application on Window’s IIS Server",
     description: "Learn how to host a Next.js app on Windows IIS using iisnode and URL Rewrite. The article covers setting up server.js and web.config, updating package.json, and resolving deployment challenges to create a private, locally-hosted application.",
-    date: "Mar 2024",
+    date: "Jan 2024",
     readTime: "5 min read",
     link: "https://medium.com/@patrick.jakobsen/deploying-nextjs-application-on-windows-iis-server-60793f416eb1",
     topics: ["NestJS", "TypeScript", "IIS", "Web Development"]
