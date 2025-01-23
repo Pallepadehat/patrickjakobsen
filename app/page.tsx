@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { GitHubIcon, LinkedInIcon, LeetCodeIcon } from "./components/social-icons";
 import Image from "next/image";
+import Testimonials from "./components/testimonials";
 import { useRef, useState, useEffect } from "react";
 
 interface Project {
@@ -298,7 +299,7 @@ export default function Home() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 sm:mb-16 text-center text-gradient">
             Tech Stack
           </h2>
-          <div className="space-y-12 sm:space-y-16 flex flex-col items-center justify-center w-full">
+          <div className="space-y-12 sm:space-y-16 flex flex-col items-center justify-center w-full max-w-7xl mx-auto">
             {Object.entries(techStack).map(([category, technologies]) => (
               <motion.div
                 key={category}
@@ -567,6 +568,8 @@ export default function Home() {
           </motion.div>
         </section>
       )}
+
+
 
       {/* Contact Section */}
       <section className="relative py-16 sm:py-24 md:py-32">
