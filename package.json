@@ -10,27 +10,19 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
-    "@sparticuz/chromium": "^131.0.1",
-    "@vercel/og": "^0.6.4",
     "capture-website": "^4.2.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.0.1",
     "next": "15.1.5",
-    "portfolio": ".",
-    "puppeteer": "^24.1.0",
-    "puppeteer-core": "^24.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-intersection-observer": "^9.15.1",
-    "tailwind-merge": "^2.6.0",
-    "webshot": "^0.18.0"
+    "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "canvas": "^3.0.1",
     "eslint": "^9",
     "eslint-config-next": "15.1.5",
     "postcss": "^8",
