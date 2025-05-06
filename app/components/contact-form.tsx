@@ -1,28 +1,30 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus('sending');
+    setStatus("sending");
 
     try {
       // Here you would typically send the form data to your backend
       // For now, we'll simulate a successful submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-    } catch (error) {
-      setStatus('error');
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+    } catch {
+      setStatus("error");
     }
   };
 
@@ -43,7 +45,9 @@ export default function ContactForm() {
               type="text"
               id="name"
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
               className="w-full px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
@@ -56,7 +60,9 @@ export default function ContactForm() {
               type="email"
               id="email"
               value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
               className="w-full px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
@@ -68,7 +74,9 @@ export default function ContactForm() {
             <textarea
               id="message"
               value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, message: e.target.value })
+              }
               rows={4}
               className="w-full px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
@@ -76,16 +84,20 @@ export default function ContactForm() {
           </div>
           <button
             type="submit"
-            disabled={status === 'sending'}
+            disabled={status === "sending"}
             className="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
           >
-            {status === 'sending' ? 'Sending...' : 'Send Message'}
+            {status === "sending" ? "Sending..." : "Send Message"}
           </button>
-          {status === 'success' && (
-            <p className="text-green-500 text-center">Message sent successfully!</p>
+          {status === "success" && (
+            <p className="text-green-500 text-center">
+              Message sent successfully!
+            </p>
           )}
-          {status === 'error' && (
-            <p className="text-red-500 text-center">Failed to send message. Please try again.</p>
+          {status === "error" && (
+            <p className="text-red-500 text-center">
+              Failed to send message. Please try again.
+            </p>
           )}
         </form>
       </motion.div>

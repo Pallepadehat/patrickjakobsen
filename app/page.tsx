@@ -1,10 +1,14 @@
-'use client';
+"use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { GitHubIcon, LinkedInIcon, LeetCodeIcon } from "./components/social-icons";
+import {
+  GitHubIcon,
+  LinkedInIcon,
+  LeetCodeIcon,
+} from "./components/social-icons";
 import Image from "next/image";
-import Testimonials from "./components/testimonials";
+
 import { useRef, useState, useEffect } from "react";
 
 interface Project {
@@ -45,27 +49,27 @@ const greetings = [
 ];
 
 const techStack = {
-  "Languages": [
+  Languages: [
     { name: "TypeScript", icon: "/icons/typescript.svg" },
     { name: "PHP", icon: "/icons/php.svg" },
     { name: "Lua", icon: "/icons/lua.svg" },
     { name: "Swift", icon: "/icons/swift.svg" },
   ],
-  "Frontend": [
+  Frontend: [
     { name: "React", icon: "/icons/react.svg" },
     { name: "Next.js", icon: "/icons/nextjs.svg" },
     { name: "Vue", icon: "/icons/vue.svg" },
     { name: "Tailwind CSS", icon: "/icons/tailwind.svg" },
   ],
-  "Backend": [
+  Backend: [
     { name: "NestJS", icon: "/icons/nestjs.svg" },
     { name: "Laravel", icon: "/icons/laravel.svg" },
   ],
-  "Mobile": [
+  Mobile: [
     { name: "React Native", icon: "/icons/react.svg" },
     { name: "SwiftUI", icon: "/icons/swift.svg" },
   ],
-  "Tools": [
+  Tools: [
     { name: "Vite", icon: "/icons/vite.svg" },
     { name: "Git", icon: "/icons/git.svg" },
     { name: "Docker", icon: "/icons/docker.svg" },
@@ -73,27 +77,55 @@ const techStack = {
 };
 
 const projects: Project[] = [
-    {
-        title: "My Movie Mate",
-        description: "My Movie Mate is a movie and tv shows app that allows you to search for movies and tv shows and get detailed information about them. You can also add them to your watchlist, mark them as watched, get notifications when a new season is released and more.",
-        tech: ["Swift", "SwiftUI", "UIKit", "CoreLocation", "Git"],
-        link: "https://mymoviemate.xyz",
-        image: "/mymoviemate.png"
-    },
-    {
-        title: "PJToolKit",
-        description: "PJToolKit was a cli tool that i made to help my self with some basic setup off discord bots. It was made to give a good experience when setting up a discord bot. With some default commands you could add to your bot and more features.",
-        tech: ["TypeScript", "JavaScript", "Git", "Discord.js", "Node.js", "NPM"],
-        link: "https://github.com/Pallepadehat/PJToolKit",
-        image: "/pjtoolkit.png"
-    },
-    {
-        title: "MealHub",
-        description: "MealHub was a school project where we had to make a website that helps people find recipes, add it to their shopping list. But we took it a step further and added a chatbot that helps you find recipes and add it to your shopping list.",
-        tech: ["TypeScript", "Git", "NextJS", "AppWrite", "TailwindCSS", "Shadcn", "React"],
-        link: "https://github.com/Pallepadehat/MealHub",
-        image: "/mealhub.png"
-    }
+  {
+    title: "next-limitr",
+    description:
+      "next-limitr is a middleware for Next.js that allows you to rate limit your API routes. It is a simple and easy to use middleware that is built for the modern web.",
+    tech: [
+      "TypeScript",
+      "Next.js",
+      "Node.js",
+      "Git",
+      "NPM",
+      "ESLint",
+      "Prettier",
+      "Rate Limiting",
+    ],
+    link: "https://github.com/Pallepadehat/next-limitr",
+    image: "/next-limitr.png",
+  },
+  {
+    title: "My Movie Mate",
+    description:
+      "My Movie Mate is a movie and tv shows app that allows you to search for movies and tv shows and get detailed information about them. You can also add them to your watchlist, mark them as watched, get notifications when a new season is released and more.",
+    tech: ["Swift", "SwiftUI", "UIKit", "CoreLocation", "Git"],
+    link: "https://mymoviemate.xyz",
+    image: "/mymoviemate.png",
+  },
+  {
+    title: "PJToolKit",
+    description:
+      "PJToolKit was a cli tool that i made to help my self with some basic setup off discord bots. It was made to give a good experience when setting up a discord bot. With some default commands you could add to your bot and more features.",
+    tech: ["TypeScript", "JavaScript", "Git", "Discord.js", "Node.js", "NPM"],
+    link: "https://github.com/Pallepadehat/PJToolKit",
+    image: "/pjtoolkit.png",
+  },
+  {
+    title: "MealHub",
+    description:
+      "MealHub was a school project where we had to make a website that helps people find recipes, add it to their shopping list. But we took it a step further and added a chatbot that helps you find recipes and add it to your shopping list.",
+    tech: [
+      "TypeScript",
+      "Git",
+      "NextJS",
+      "AppWrite",
+      "TailwindCSS",
+      "Shadcn",
+      "React",
+    ],
+    link: "https://github.com/Pallepadehat/MealHub",
+    image: "/mealhub.png",
+  },
 ];
 
 const timeline: TimelineItem[] = [
@@ -101,56 +133,77 @@ const timeline: TimelineItem[] = [
     title: "Full Stack Developer Student",
     company: "Ordbogen A/S",
     period: "2024 - Present",
-    description: "Working on developing and maintaining web applications using modern technologies. Learning and implementing best practices in software development while contributing to large-scale applications.",
-    technologies: ["TypeScript", "JavaScript", "Vue3", "PHP", "Laravel", "Git", "Flutter", "React Native"]
+    description:
+      "Working on developing and maintaining web applications using modern technologies. Learning and implementing best practices in software development while contributing to large-scale applications.",
+    technologies: [
+      "TypeScript",
+      "JavaScript",
+      "Vue3",
+      "PHP",
+      "Laravel",
+      "Git",
+      "Flutter",
+      "React Native",
+    ],
   },
   {
     title: "Programming Technician Student",
     company: "ZBC Ringsted",
     period: "2022 - 2027",
-    description: "Studying as a Data Technician with specialization in Programming (Datatekniker med speciale i programmering). Learning comprehensive software development, from fundamental programming concepts to advanced system architecture.",
+    description:
+      "Studying as a Data Technician with specialization in Programming (Datatekniker med speciale i programmering). Learning comprehensive software development, from fundamental programming concepts to advanced system architecture.",
     technologies: [
       "Software Development",
       "System Architecture",
       "Database Management",
       "Network Programming",
       "Web Development",
-      "Mobile Development"
-    ]
+      "Mobile Development",
+    ],
   },
   {
     title: "Sales Assistant",
     company: "Føtex, Salling Group",
     period: "2022 - 2024",
-    description: "Versatile role handling multiple departments including customer service, checkout operations, bakery, and bottle recycling. Developed strong multitasking abilities while maintaining high service standards and ensuring efficient operations across different store sections.",
+    description:
+      "Versatile role handling multiple departments including customer service, checkout operations, bakery, and bottle recycling. Developed strong multitasking abilities while maintaining high service standards and ensuring efficient operations across different store sections.",
     technologies: [
       "Customer Service",
       "Cash Handling",
       "Bakery Operations",
       "Recycling Management",
       "Team Collaboration",
-      "Problem Solving"
-    ]
-  }
+      "Problem Solving",
+    ],
+  },
 ];
 
 const writings: WritingItem[] = [
   {
-    title: "Deploying NextJs Application on Window’s IIS Server",
-    description: "Learn how to host a Next.js app on Windows IIS using iisnode and URL Rewrite. The article covers setting up server.js and web.config, updating package.json, and resolving deployment challenges to create a private, locally-hosted application.",
+    title: "Rate Limit Like a Boss — Introducing next-limitr for Next.js",
+    description:
+      "Rate limiting doesn't have to be boring. Meet the slick middleware that makes protecting your Next.js APIs powerful, flexible, and honestly… kind of fun.",
+    date: "Apr, 2025",
+    readTime: "4 min read",
+    link: "https://medium.com/@patrick.jakobsen/rate-limit-like-a-boss-introducing-next-limitr-for-next-js-25e9d3abb384",
+    topics: ["NextJS", "TypeScript", "Rate Limiting", "Web Development"],
+  },
+  {
+    title: "Deploying NextJs Application on Window's IIS Server",
+    description:
+      "Learn how to host a Next.js app on Windows IIS using iisnode and URL Rewrite. The article covers setting up server.js and web.config, updating package.json, and resolving deployment challenges to create a private, locally-hosted application.",
     date: "Jan 2024",
     readTime: "5 min read",
     link: "https://medium.com/@patrick.jakobsen/deploying-nextjs-application-on-windows-iis-server-60793f416eb1",
-    topics: ["NestJS", "TypeScript", "IIS", "Web Development"]
+    topics: ["NextJS", "TypeScript", "IIS", "Web Development"],
   },
-  // Add more articles as you write them
 ];
 
 export default function Home() {
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end start"],
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
@@ -167,7 +220,10 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-black relative overflow-hidden" ref={targetRef}>
+    <main
+      className="min-h-screen bg-black relative overflow-hidden"
+      ref={targetRef}
+    >
       <div className="bg-grid fixed inset-0" />
 
       {/* Hero Section */}
@@ -200,9 +256,7 @@ export default function Home() {
                 {greetings[currentGreeting].text}
               </motion.p>
             </div>
-            <motion.h1
-              className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-tight"
-            >
+            <motion.h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-tight">
               <span className="text-gradient">I&apos;m Patrick Jakobsen</span>
             </motion.h1>
           </motion.div>
@@ -218,9 +272,25 @@ export default function Home() {
               Full Stack Developer Student at Ordbogen A/S
             </motion.p>
             <motion.p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-              I&apos;m an 18-year-old developer based in Denmark, passionate about creating modern,
-              user-friendly applications using cutting-edge technologies. My journey in full-stack
-              development spans across web, mobile, and backend technologies.
+              I&apos;m a{" "}
+              {(() => {
+                const birthDate = new Date(2006, 2, 18); // March is month 2 (0-indexed)
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const hasBirthdayOccurredThisYear =
+                  today.getMonth() > birthDate.getMonth() ||
+                  (today.getMonth() === birthDate.getMonth() &&
+                    today.getDate() >= birthDate.getDate());
+
+                if (!hasBirthdayOccurredThisYear) {
+                  age--;
+                }
+                return age;
+              })()}{" "}
+              year old developer based in Denmark, passionate about creating
+              modern, user-friendly applications using cutting-edge
+              technologies. My journey in full-stack development spans across
+              web, mobile, and backend technologies.
             </motion.p>
           </motion.div>
 
@@ -264,7 +334,9 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1 }}
             className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer hover-scale"
-            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+            onClick={() =>
+              window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
+            }
           >
             <div className="w-6 h-10 border-2 border-gray-400 rounded-full p-1">
               <motion.div
@@ -292,7 +364,7 @@ export default function Home() {
           viewport={{ once: true, margin: "-100px" }}
           variants={{
             hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+            visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
           }}
           className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10"
         >
@@ -305,7 +377,7 @@ export default function Home() {
                 key={category}
                 variants={{
                   hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 }
+                  visible: { opacity: 1, y: 0 },
                 }}
                 className="space-y-6 sm:space-y-8 w-full max-w-6xl"
               >
@@ -318,7 +390,7 @@ export default function Home() {
                       key={tech.name}
                       variants={{
                         hidden: { opacity: 0, scale: 0.8 },
-                        visible: { opacity: 1, scale: 1 }
+                        visible: { opacity: 1, scale: 1 },
                       }}
                       whileHover={{ y: -5, scale: 1.05 }}
                       className="group"
@@ -360,7 +432,7 @@ export default function Home() {
           viewport={{ once: true, margin: "-100px" }}
           variants={{
             hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+            visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
           }}
           className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
         >
@@ -410,89 +482,97 @@ export default function Home() {
         </motion.div>
       </section>
 
-
-
       {/* Projects Section */}
       {projects.length > 0 && (
-      <section className="relative py-16 sm:py-24 md:py-32">
-        <div className="hero-gradient absolute inset-0 z-0 opacity-30" />
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
-          }}
-          className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10"
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 sm:mb-12 text-center text-gradient">
-            Featured Projects
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {projects.map((project) => (
-              <motion.div
-                key={project.title}
-                variants={{
-                  hidden: { opacity: 0, y: 50 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-                }}
-                whileHover={{ y: -10 }}
-                className="card-gradient rounded-xl overflow-hidden glow group"
-              >
-                <Link
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block relative h-40 sm:h-48 overflow-hidden"
+        <section className="relative py-16 sm:py-24 md:py-32">
+          <div className="hero-gradient absolute inset-0 z-0 opacity-30" />
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+            }}
+            className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10"
+          >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 sm:mb-12 text-center text-gradient">
+              Featured Projects
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              {projects.map((project) => (
+                <motion.div
+                  key={project.title}
+                  variants={{
+                    hidden: { opacity: 0, y: 50 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 0.5 },
+                    },
+                  }}
+                  whileHover={{ y: -10 }}
+                  className="card-gradient rounded-xl overflow-hidden glow group"
                 >
-                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
-                    <span className="text-white font-medium">Visit Project →</span>
-                  </div>
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-all duration-500 group-hover:scale-110"
-                    priority
-                  />
-                </Link>
-                <div className="p-4 sm:p-6">
-                  <h3 className="text-lg sm:text-xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-sm sm:text-base text-gray-400 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="tech-pill text-xs px-2 py-1 rounded-full"
-                      >
-                        {tech}
+                  <Link
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block relative h-40 sm:h-48 overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+                      <span className="text-white font-medium">
+                        Visit Project →
                       </span>
-                    ))}
+                    </div>
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition-all duration-500 group-hover:scale-110"
+                      priority
+                    />
+                  </Link>
+                  <div className="p-4 sm:p-6">
+                    <h3 className="text-lg sm:text-xl font-bold mb-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm sm:text-base text-gray-400 mb-4">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tech.map((tech) => (
+                        <span
+                          key={tech}
+                          className="tech-pill text-xs px-2 py-1 rounded-full"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex gap-4">
+                      {project.github && (
+                        <Link
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs sm:text-sm text-white hover:text-gray-300 transition-colors hover-scale inline-block"
+                        >
+                          View on GitHub →
+                        </Link>
+                      )}
+                    </div>
                   </div>
-                  <div className="flex gap-4">
-                    {project.github && (
-                      <Link
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs sm:text-sm text-white hover:text-gray-300 transition-colors hover-scale inline-block"
-                      >
-                        View on GitHub →
-                      </Link>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </section>
       )}
 
-       {/* Writing Section */}
-       {writings.length > 0 && (
+      {/* Writing Section */}
+      {writings.length > 0 && (
         <section className="relative py-16 sm:py-24">
           <motion.div
             initial="hidden"
@@ -500,7 +580,7 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             variants={{
               hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
+              visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
             }}
             className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
           >
@@ -513,7 +593,7 @@ export default function Home() {
                   key={article.title}
                   variants={{
                     hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 }
+                    visible: { opacity: 1, y: 0 },
                   }}
                   className="group"
                 >
@@ -521,17 +601,21 @@ export default function Home() {
                     href={article.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block"
+                    className="block h-full"
                   >
                     <div className="timeline-card rounded-xl p-6 h-full flex flex-col">
                       <div className="flex items-center justify-between mb-4">
-                        <span className="text-sm text-gray-400">{article.date}</span>
-                        <span className="text-sm text-gray-400">{article.readTime}</span>
+                        <span className="text-sm text-gray-400">
+                          {article.date}
+                        </span>
+                        <span className="text-sm text-gray-400">
+                          {article.readTime}
+                        </span>
                       </div>
                       <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-indigo-400 transition-colors">
                         {article.title}
                       </h3>
-                      <p className="text-gray-400 mb-4 flex-grow">
+                      <p className="text-gray-400 mb-4 flex-grow line-clamp-3">
                         {article.description}
                       </p>
                       <div className="flex flex-wrap gap-2 mb-4">
@@ -544,7 +628,7 @@ export default function Home() {
                           </span>
                         ))}
                       </div>
-                      <div className="flex items-center text-indigo-400 group-hover:text-indigo-300 transition-colors">
+                      <div className="flex items-center text-indigo-400 group-hover:text-indigo-300 transition-colors mt-auto">
                         <span>Read article</span>
                         <svg
                           className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform"
@@ -569,8 +653,6 @@ export default function Home() {
         </section>
       )}
 
-
-
       {/* Contact Section */}
       <section className="relative py-16 sm:py-24 md:py-32">
         <div className="hero-gradient absolute inset-0 z-0 opacity-50" />
@@ -580,7 +662,7 @@ export default function Home() {
           viewport={{ once: true }}
           variants={{
             hidden: { opacity: 0, y: 50 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+            visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
           }}
           className="container mx-auto px-4 sm:px-6 md:px-8 text-center relative z-10"
         >
@@ -639,4 +721,4 @@ const TimelineContent = ({ item }: { item: TimelineItem }) => (
       </div>
     )}
   </>
-)
+);
