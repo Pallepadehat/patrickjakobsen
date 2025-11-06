@@ -17,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.className} bg-black text-white antialiased`}>
+        <script src="https://29309c57.orvian-support-agent.pages.dev/embed.iife.js" data-organization-id="org_34VmGCckheqaZ0KkFip7GpXA9x1" data-auto-crawl="true" data-crawl-depth="2"></script>
         {children}
       </body>
     </html>
