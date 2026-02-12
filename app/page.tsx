@@ -1,59 +1,31 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import {
   GitHubIcon,
   LinkedInIcon,
   LeetCodeIcon,
 } from "./components/social-icons";
-import Image from "next/image";
 
-import { useRef, useState, useEffect } from "react";
+// --- Data ---
 
 interface Project {
   title: string;
   description: string;
   tech: string[];
   link: string;
-  github?: string;
   image: string;
+  span?: string;
 }
-
-interface TimelineItem {
-  title: string;
-  company: string;
-  period: string;
-  description: string;
-  technologies?: string[];
-}
-
-interface WritingItem {
-  title: string;
-  description: string;
-  date: string;
-  readTime: string;
-  link: string;
-  topics: string[];
-}
-
-const greetings = [
-  { text: "Hello", lang: "English" },
-  { text: "Hej", lang: "Danish" },
-  { text: "Bonjour", lang: "French" },
-  { text: "Hola", lang: "Spanish" },
-  { text: "Ciao", lang: "Italian" },
-  { text: "こんにちは", lang: "Japanese" },
-  { text: "안녕하세요", lang: "Korean" },
-  { text: "Hallo", lang: "German" },
-];
 
 const techStack = {
   Languages: [
     { name: "TypeScript", icon: "/icons/typescript.svg" },
+    { name: "Swift", icon: "/icons/swift.svg" },
     { name: "PHP", icon: "/icons/php.svg" },
     { name: "Lua", icon: "/icons/lua.svg" },
-    { name: "Swift", icon: "/icons/swift.svg" },
   ],
   Frontend: [
     { name: "React", icon: "/icons/react.svg" },
@@ -70,7 +42,6 @@ const techStack = {
     { name: "SwiftUI", icon: "/icons/swift.svg" },
   ],
   Tools: [
-    { name: "Vite", icon: "/icons/vite.svg" },
     { name: "Git", icon: "/icons/git.svg" },
     { name: "Docker", icon: "/icons/docker.svg" },
   ],
@@ -78,647 +49,244 @@ const techStack = {
 
 const projects: Project[] = [
   {
-    title: "next-limitr",
+    title: "MarkdownEditor",
     description:
-      "next-limitr is a middleware for Next.js that allows you to rate limit your API routes. It is a simple and easy to use middleware that is built for the modern web.",
-    tech: [
-      "TypeScript",
-      "Next.js",
-      "Node.js",
-      "Git",
-      "NPM",
-      "ESLint",
-      "Prettier",
-      "Rate Limiting",
-    ],
-    link: "https://github.com/Pallepadehat/next-limitr",
-    image: "/next-limitr.png",
+      "A native Markdown editing component for macOS, built with SwiftUI and CodeMirror 6.",
+    tech: ["SwiftUI", "CodeMirror 6", "Swift"],
+    link: "https://github.com/Pallepadehat/MarkdownEditor",
+    image: "/markdown-editor.png",
+    span: "col-span-1 md:col-span-2",
   },
   {
-    title: "My Movie Mate",
+    title: "opendiff",
     description:
-      "My Movie Mate is a movie and tv shows app that allows you to search for movies and tv shows and get detailed information about them. You can also add them to your watchlist, mark them as watched, get notifications when a new season is released and more.",
-    tech: ["Swift", "SwiftUI", "UIKit", "CoreLocation", "Git"],
-    link: "https://mymoviemate.xyz",
-    image: "/mymoviemate.png",
+      "A clean, keyboard-friendly terminal UI for diffing files and directories.",
+    tech: ["TypeScript", "Bun"],
+    link: "https://github.com/Pallepadehat/opendiff",
+    image: "/opendiff.png",
+    span: "col-span-1",
   },
   {
-    title: "PJToolKit",
+    title: "brewkeeper",
     description:
-      "PJToolKit was a cli tool that i made to help my self with some basic setup off discord bots. It was made to give a good experience when setting up a discord bot. With some default commands you could add to your bot and more features.",
-    tech: ["TypeScript", "JavaScript", "Git", "Discord.js", "Node.js", "NPM"],
-    link: "https://github.com/Pallepadehat/PJToolKit",
-    image: "/pjtoolkit.png",
-  },
-  {
-    title: "MealHub",
-    description:
-      "MealHub was a school project where we had to make a website that helps people find recipes, add it to their shopping list. But we took it a step further and added a chatbot that helps you find recipes and add it to your shopping list.",
-    tech: [
-      "TypeScript",
-      "Git",
-      "NextJS",
-      "AppWrite",
-      "TailwindCSS",
-      "Shadcn",
-      "React",
-    ],
-    link: "https://github.com/Pallepadehat/MealHub",
-    image: "/mealhub.png",
+      "A polished terminal UI for Homebrew upgrades, focused on safer decisions.",
+    tech: ["Bun", "React", "OpenTUI"],
+    link: "https://github.com/Pallepadehat/brewkeeper",
+    image: "/brewkeeper.png",
+    span: "col-span-1",
   },
 ];
 
-const timeline: TimelineItem[] = [
+const timeline = [
   {
-    title: "Full Stack Developer Student",
     company: "Ordbogen A/S",
+    role: "Full Stack Developer",
     period: "2024 - Present",
-    description:
-      "Working on developing and maintaining web applications using modern technologies. Learning and implementing best practices in software development while contributing to large-scale applications.",
-    technologies: [
-      "TypeScript",
-      "JavaScript",
-      "Vue3",
-      "PHP",
-      "Laravel",
-      "Git",
-      "Flutter",
-      "React Native",
-    ],
   },
   {
-    title: "Programming Technician Student",
     company: "ZBC Ringsted",
+    role: "Programming Technician",
     period: "2022 - 2027",
-    description:
-      "Studying as a Data Technician with specialization in Programming (Datatekniker med speciale i programmering). Learning comprehensive software development, from fundamental programming concepts to advanced system architecture.",
-    technologies: [
-      "Software Development",
-      "System Architecture",
-      "Database Management",
-      "Network Programming",
-      "Web Development",
-      "Mobile Development",
-    ],
-  },
-  {
-    title: "Sales Assistant",
-    company: "Føtex, Salling Group",
-    period: "2022 - 2024",
-    description:
-      "Versatile role handling multiple departments including customer service, checkout operations, bakery, and bottle recycling. Developed strong multitasking abilities while maintaining high service standards and ensuring efficient operations across different store sections.",
-    technologies: [
-      "Customer Service",
-      "Cash Handling",
-      "Bakery Operations",
-      "Recycling Management",
-      "Team Collaboration",
-      "Problem Solving",
-    ],
   },
 ];
 
-const writings: WritingItem[] = [
-  {
-    title: "Rate Limit Like a Boss — Introducing next-limitr for Next.js",
-    description:
-      "Rate limiting doesn't have to be boring. Meet the slick middleware that makes protecting your Next.js APIs powerful, flexible, and honestly… kind of fun.",
-    date: "Apr, 2025",
-    readTime: "4 min read",
-    link: "https://medium.com/@patrick.jakobsen/rate-limit-like-a-boss-introducing-next-limitr-for-next-js-25e9d3abb384",
-    topics: ["NextJS", "TypeScript", "Rate Limiting", "Web Development"],
-  },
-  {
-    title: "Deploying NextJs Application on Window's IIS Server",
-    description:
-      "Learn how to host a Next.js app on Windows IIS using iisnode and URL Rewrite. The article covers setting up server.js and web.config, updating package.json, and resolving deployment challenges to create a private, locally-hosted application.",
-    date: "Jan 2024",
-    readTime: "5 min read",
-    link: "https://medium.com/@patrick.jakobsen/deploying-nextjs-application-on-windows-iis-server-60793f416eb1",
-    topics: ["NextJS", "TypeScript", "IIS", "Web Development"],
-  },
-];
+// --- Components ---
 
 export default function Home() {
-  const targetRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-    offset: ["start start", "end start"],
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
-  const y = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
-
-  const [currentGreeting, setCurrentGreeting] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentGreeting((prev) => (prev + 1) % greetings.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <main
-      className="min-h-screen bg-black relative overflow-hidden"
-      ref={targetRef}
-    >
-      <div className="bg-grid fixed inset-0" />
+    <main className="min-h-screen bg-background text-foreground selection:bg-white/20 overflow-x-hidden">
+      <div className="max-w-3xl mx-auto px-6 sm:px-12 py-32 sm:py-48 space-y-40">
+        {/* Header / Hero */}
+        <section className="space-y-10 animate-fade-up">
+          <div className="space-y-6">
+            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-white/95">
+              Patrick Jakobsen
+            </h1>
+            <p className="text-xl sm:text-2xl text-muted font-medium max-w-2xl leading-relaxed text-balance">
+              Full Stack Developer Student at Ordbogen A/S based in Denmark. I
+              build <span className="text-white/90">polished</span>,{" "}
+              <span className="text-white/90">performance-focused</span>{" "}
+              experiences across web, mobile, and backend.
+            </p>
+          </div>
 
-      {/* Hero Section */}
-      <motion.section
-        className="relative min-h-screen flex items-center justify-center"
-        style={{ opacity, scale, y }}
-      >
-        <div className="hero-gradient absolute inset-0 z-0" />
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 space-y-12 text-center"
-        >
-          {/* Greeting and Name */}
-          <motion.div
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="floating px-4 sm:px-6 md:px-8"
-          >
-            <div className="h-16 mb-4">
-              <motion.p
-                key={currentGreeting}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                className="text-2xl sm:text-3xl text-gray-400"
-              >
-                {greetings[currentGreeting].text}
-              </motion.p>
-            </div>
-            <motion.h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-tight">
-              <span className="text-gradient">I&apos;m Patrick Jakobsen</span>
-            </motion.h1>
-          </motion.div>
-
-          {/* About Me Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="max-w-3xl mx-auto space-y-6 px-4 sm:px-6 md:px-8"
-          >
-            <motion.p className="text-lg sm:text-xl md:text-2xl text-gray-400 font-medium">
-              Full Stack Developer Student at Ordbogen A/S
-            </motion.p>
-            <motion.p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-              I&apos;m a{" "}
-              {(() => {
-                const birthDate = new Date(2006, 2, 18); // March is month 2 (0-indexed)
-                const today = new Date();
-                let age = today.getFullYear() - birthDate.getFullYear();
-                const hasBirthdayOccurredThisYear =
-                  today.getMonth() > birthDate.getMonth() ||
-                  (today.getMonth() === birthDate.getMonth() &&
-                    today.getDate() >= birthDate.getDate());
-
-                if (!hasBirthdayOccurredThisYear) {
-                  age--;
-                }
-                return age;
-              })()}{" "}
-              year old developer based in Denmark, passionate about creating
-              modern, user-friendly applications using cutting-edge
-              technologies. My journey in full-stack development spans across
-              web, mobile, and backend technologies.
-            </motion.p>
-          </motion.div>
-
-          {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex items-center justify-center space-x-6"
-          >
-            <Link
-              href="https://github.com/pallepadehat"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors hover-scale"
-            >
-              <GitHubIcon className="w-8 h-8" />
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/patrick-jakobsen-aa8652288?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors hover-scale"
-            >
-              <LinkedInIcon className="w-8 h-8" />
-            </Link>
-
-            <Link
-              href="https://leetcode.com/u/pallepadehat/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors hover-scale"
-            >
-              <LeetCodeIcon className="w-8 h-8" />
-            </Link>
-          </motion.div>
-
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer hover-scale"
-            onClick={() =>
-              window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
-            }
-          >
-            <div className="w-6 h-10 border-2 border-gray-400 rounded-full p-1">
-              <motion.div
-                animate={{
-                  y: [0, 12, 0],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  repeatType: "loop",
-                }}
-                className="w-1.5 h-1.5 bg-gray-400 rounded-full mx-auto"
+          <div className="flex gap-6 items-center">
+            <div className="flex gap-5">
+              <SocialLink
+                href="https://github.com/pallepadehat"
+                icon={<GitHubIcon className="w-5 h-5" />}
+              />
+              <SocialLink
+                href="https://www.linkedin.com/in/patrick-jakobsen-aa8652288"
+                icon={<LinkedInIcon className="w-5 h-5" />}
+              />
+              <SocialLink
+                href="https://leetcode.com/u/pallepadehat/"
+                icon={<LeetCodeIcon className="w-5 h-5" />}
               />
             </div>
-          </motion.div>
-        </motion.div>
-      </motion.section>
+          </div>
+        </section>
 
-      {/* Tech Stack Section */}
-      <section className="relative py-16 sm:py-24 md:py-32">
-        <div className="hero-gradient absolute inset-0 z-0 opacity-30" />
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
-          }}
-          className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10"
+        {/* Selected Projects */}
+        <section
+          className="space-y-12 animate-fade-up"
+          style={{ animationDelay: "100ms" }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 sm:mb-16 text-center text-gradient">
-            Tech Stack
+          <h2 className="text-sm font-semibold text-muted uppercase tracking-widest pl-1">
+            Selected Work
           </h2>
-          <div className="space-y-12 sm:space-y-16 flex flex-col items-center justify-center w-full max-w-7xl mx-auto">
-            {Object.entries(techStack).map(([category, technologies]) => (
-              <motion.div
-                key={category}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                className="space-y-6 sm:space-y-8 w-full max-w-6xl"
-              >
-                <h3 className="text-xl sm:text-2xl font-bold text-center text-gradient">
-                  {category}
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 md:gap-8 justify-center mx-auto w-full">
-                  {technologies.map((tech) => (
-                    <motion.div
-                      key={tech.name}
-                      variants={{
-                        hidden: { opacity: 0, scale: 0.8 },
-                        visible: { opacity: 1, scale: 1 },
-                      }}
-                      whileHover={{ y: -5, scale: 1.05 }}
-                      className="group"
-                    >
-                      <div className="relative aspect-square card-gradient rounded-xl p-3 sm:p-4 flex flex-col items-center justify-center gap-2 sm:gap-4 glow overflow-hidden">
-                        {/* Background Effects */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
-
-                        {/* Icon */}
-                        <div className="relative w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16">
-                          <Image
-                            src={tech.icon}
-                            alt={tech.name}
-                            fill
-                            className="object-contain filter group-hover:brightness-110 transition-all duration-300"
-                          />
-                        </div>
-
-                        {/* Name */}
-                        <p className="text-xs sm:text-sm md:text-base text-center text-gray-300 group-hover:text-white transition-colors duration-300">
-                          {tech.name}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {projects.map((project, i) => (
+              <ProjectCard key={project.title} project={project} index={i} />
             ))}
           </div>
-        </motion.div>
-      </section>
+        </section>
 
-      {/* Timeline Section */}
-      <section className="relative py-16 sm:py-24 overflow-hidden">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={{
-            hidden: { opacity: 0 },
-            visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-          }}
-          className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
+        {/* Experience */}
+        <section
+          className="space-y-12 animate-fade-up"
+          style={{ animationDelay: "200ms" }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 sm:mb-16 text-center text-gradient">
-            Experience Journey
+          <h2 className="text-sm font-semibold text-muted uppercase tracking-widest pl-1">
+            Experience
           </h2>
-          <div className="relative space-y-8">
-            <div className="timeline-line">
-              {timeline.map((item, index) => (
-                <div key={item.title} className="mb-8 sm:mb-0">
-                  {/* Desktop layout */}
-                  <div className="hidden sm:flex items-center gap-8">
-                    {/* Left side */}
-                    <div className="w-1/2 flex flex-col items-end">
-                      {index % 2 === 1 && (
-                        <div className="timeline-card w-full max-w-xl rounded-xl p-6 shadow-lg">
-                          <TimelineContent item={item} />
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Timeline indicator */}
-                    <div className="relative flex items-center">
-                      <div className="timeline-indicator" />
-                    </div>
-
-                    {/* Right side */}
-                    <div className="w-1/2 flex flex-col items-start">
-                      {index % 2 === 0 && (
-                        <div className="timeline-card w-full max-w-xl rounded-xl p-6 shadow-lg">
-                          <TimelineContent item={item} />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Mobile layout */}
-                  <div className="block sm:hidden">
-                    <div className="timeline-card w-full rounded-xl p-6 shadow-lg">
-                      <TimelineContent item={item} />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Projects Section */}
-      {projects.length > 0 && (
-        <section className="relative py-16 sm:py-24 md:py-32">
-          <div className="hero-gradient absolute inset-0 z-0 opacity-30" />
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-            }}
-            className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10"
-          >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 sm:mb-12 text-center text-gradient">
-              Featured Projects
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-              {projects.map((project) => (
-                <motion.div
-                  key={project.title}
-                  variants={{
-                    hidden: { opacity: 0, y: 50 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { duration: 0.5 },
-                    },
-                  }}
-                  whileHover={{ y: -10 }}
-                  className="card-gradient rounded-xl overflow-hidden glow group"
-                >
-                  <Link
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block relative h-40 sm:h-48 overflow-hidden"
-                  >
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
-                      <span className="text-white font-medium">
-                        Visit Project →
-                      </span>
-                    </div>
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-all duration-500 group-hover:scale-110"
-                      priority
-                    />
-                  </Link>
-                  <div className="p-4 sm:p-6">
-                    <h3 className="text-lg sm:text-xl font-bold mb-2">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-gray-400 mb-4">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tech.map((tech) => (
-                        <span
-                          key={tech}
-                          className="tech-pill text-xs px-2 py-1 rounded-full"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex gap-4">
-                      {project.github && (
-                        <Link
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs sm:text-sm text-white hover:text-gray-300 transition-colors hover-scale inline-block"
-                        >
-                          View on GitHub →
-                        </Link>
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </section>
-      )}
-
-      {/* Writing Section */}
-      {writings.length > 0 && (
-        <section className="relative py-16 sm:py-24">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-            }}
-            className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
-          >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 sm:mb-16 text-center text-gradient">
-              Writing
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {writings.map((article) => (
-                <motion.div
-                  key={article.title}
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0 },
-                  }}
-                  className="group"
-                >
-                  <Link
-                    href={article.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block h-full"
-                  >
-                    <div className="timeline-card rounded-xl p-6 h-full flex flex-col">
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="text-sm text-gray-400">
-                          {article.date}
-                        </span>
-                        <span className="text-sm text-gray-400">
-                          {article.readTime}
-                        </span>
-                      </div>
-                      <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-indigo-400 transition-colors">
-                        {article.title}
-                      </h3>
-                      <p className="text-gray-400 mb-4 flex-grow line-clamp-3">
-                        {article.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {article.topics.map((topic) => (
-                          <span
-                            key={topic}
-                            className="px-3 py-1 text-sm font-medium text-indigo-300 bg-indigo-500/10 rounded-full"
-                          >
-                            {topic}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="flex items-center text-indigo-400 group-hover:text-indigo-300 transition-colors mt-auto">
-                        <span>Read article</span>
-                        <svg
-                          className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </section>
-      )}
-
-      {/* Contact Section */}
-      <section className="relative py-16 sm:py-24 md:py-32">
-        <div className="hero-gradient absolute inset-0 z-0 opacity-50" />
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            hidden: { opacity: 0, y: 50 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-          }}
-          className="container mx-auto px-4 sm:px-6 md:px-8 text-center relative z-10"
-        >
-          <motion.div
-            className="card-gradient rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 glow"
-            whileHover={{ y: -5 }}
-          >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8 text-gradient">
-              Let&apos;s Connect
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8">
-              I&apos;m always open to new opportunities and collaborations.
-            </p>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block"
-            >
-              <Link
-                href="mailto:contactpatrickjak@icloud.com"
-                className="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-base hover:from-indigo-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-indigo-500/25"
+          <div className="space-y-8">
+            {timeline.map((item, i) => (
+              <div
+                key={i}
+                className="group flex justify-between items-baseline border-b border-white/5 pb-4 hover:border-white/20 transition-colors duration-300"
               >
-                Get in Touch
-              </Link>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      </section>
+                <div className="space-y-1">
+                  <h3 className="text-lg font-medium text-white/90 group-hover:text-white transition-colors">
+                    {item.company}
+                  </h3>
+                  <p className="text-muted text-sm group-hover:text-muted/80 transition-colors">
+                    {item.role}
+                  </p>
+                </div>
+                <div className="text-sm text-white/20 font-mono group-hover:text-white/50 transition-colors">
+                  {item.period}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Stack */}
+        <section
+          className="space-y-12 animate-fade-up"
+          style={{ animationDelay: "300ms" }}
+        >
+          <h2 className="text-sm font-semibold text-muted uppercase tracking-widest pl-1">
+            Toolkit
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-10">
+            {Object.entries(techStack).map(([category, items]) => (
+              <div key={category} className="space-y-4">
+                <ul className="space-y-3">
+                  {items.map((item) => (
+                    <li
+                      key={item.name}
+                      className="flex items-center gap-3 text-muted/60 hover:text-white transition-colors group"
+                    >
+                      <div className="w-4 h-4 relative opacity-60 group-hover:opacity-100 transition-opacity">
+                        <Image
+                          src={item.icon}
+                          alt={item.name}
+                          fill
+                          className="object-contain" // Removed brightness-0 invert
+                        />
+                      </div>
+                      <span className="text-sm font-medium">{item.name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer
+          className="pt-20 pb-12 animate-fade-up"
+          style={{ animationDelay: "400ms" }}
+        >
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-6 border-t border-white/5 pt-8">
+            <p className="text-sm text-white/20">
+              &copy; {new Date().getFullYear()} Patrick Jakobsen.
+            </p>
+            <Link
+              href="mailto:contactpatrickjak@icloud.com"
+              className="text-sm font-medium text-muted hover:text-white transition-colors"
+            >
+              Get in Touch &rarr;
+            </Link>
+          </div>
+        </footer>
+      </div>
     </main>
   );
 }
 
-// Add TimelineContent component for reusability
-const TimelineContent = ({ item }: { item: TimelineItem }) => (
-  <>
-    <div className="flex items-center justify-between mb-4">
-      <h3 className="text-xl font-semibold bg-gradient-to-r from-indigo-500 to-indigo-300 bg-clip-text text-transparent">
-        {item.title}
-      </h3>
-      <span className="timeline-period text-sm font-medium text-gray-400">
-        {item.period}
-      </span>
-    </div>
-    <h4 className="text-lg font-medium text-gray-300 mb-2">{item.company}</h4>
-    <p className="text-gray-400 mb-4">{item.description}</p>
-    {item.technologies && item.technologies.length > 0 && (
-      <div className="flex flex-wrap gap-2">
-        {item.technologies.map((tech) => (
-          <span
-            key={tech}
-            className="px-3 py-1 text-sm font-medium text-indigo-300 bg-indigo-500/10 rounded-full"
-          >
-            {tech}
-          </span>
-        ))}
-      </div>
-    )}
-  </>
-);
+function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
+  return (
+    <Link
+      href={href}
+      target="_blank"
+      className="text-muted/60 hover:text-white transition-all duration-300 hover:scale-110"
+    >
+      {icon}
+    </Link>
+  );
+}
+
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.1 + index * 0.1, duration: 0.5, ease: "easeOut" }}
+      className={`group relative overflow-hidden rounded-xl bg-neutral-900/30 border border-white/5 hover:border-white/10 transition-all duration-500 ${project.span || "col-span-1"}`}
+    >
+      <Link
+        href={project.link}
+        target="_blank"
+        className="h-full flex flex-col"
+      >
+        <div
+          className={`relative w-full overflow-hidden ${project.span?.includes("md:col-span-2") ? "h-64 sm:h-96" : "h-48"}`}
+        >
+          <div className="absolute inset-0 bg-black/20 z-10 group-hover:bg-transparent transition-colors duration-500" />
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            className="object-cover object-top transform group-hover:scale-105 transition-transform duration-700 ease-apple grayscale group-hover:grayscale-0"
+          />
+        </div>
+
+        <div className="p-5 flex-1 flex flex-col justify-between bg-gradient-to-b from-transparent to-black/40">
+          <div>
+            <h3 className="text-lg font-semibold text-white/90 group-hover:text-white transition-colors mb-2">
+              {project.title}
+            </h3>
+            <p className="text-sm text-muted line-clamp-2 leading-relaxed">
+              {project.description}
+            </p>
+          </div>
+          <div className="flex gap-2 mt-4 flex-wrap">
+            {project.tech.map((t) => (
+              <span
+                key={t}
+                className="text-[10px] text-white/40 bg-white/5 px-2 py-1 rounded border border-white/5"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
