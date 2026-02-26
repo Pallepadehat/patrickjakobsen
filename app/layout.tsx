@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,13 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.className} bg-black text-white antialiased`}>
-        <script
-          src="https://29309c57.orvian-support-agent.pages.dev/embed.iife.js"
-          data-organization-id="org_34VmGCckheqaZ0KkFip7GpXA9x1"
-          data-auto-crawl="true"
-          data-crawl-depth="2"
-          async
-        />
+        <Analytics />
         {children}
       </body>
     </html>
