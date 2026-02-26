@@ -49,13 +49,22 @@ const techStack = {
 
 const projects: Project[] = [
   {
+    title: "Elbert",
+    description:
+      "A fast macOS launcher built with SwiftUI for apps, plugin commands, and fuzzy search.",
+    tech: ["SwiftUI", "Swift", "macOS"],
+    link: "https://github.com/Pallepadehat/Elbert",
+    image: "/Elbert.png",
+    span: "col-span-1 md:col-span-2",
+  },
+  {
     title: "MarkdownEditor",
     description:
       "A native Markdown editing component for macOS, built with SwiftUI and CodeMirror 6.",
     tech: ["SwiftUI", "CodeMirror 6", "Swift"],
     link: "https://github.com/Pallepadehat/MarkdownEditor",
     image: "/markdown-editor.png",
-    span: "col-span-1 md:col-span-2",
+    span: "col-span-1",
   },
   {
     title: "opendiff",
