@@ -115,7 +115,7 @@ export default function Home() {
               Full Stack Developer Student at Ordbogen A/S based in Denmark. I
               build <span className="text-white/90">polished</span>,{" "}
               <span className="text-white/90">performance-focused</span>{" "}
-              experiences across web, mobile, and backend.
+              experiences across web, desktop, mobile, and backend.
             </p>
           </div>
 
