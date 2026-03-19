@@ -64,7 +64,7 @@ const projects: Project[] = [
     tech: ["SwiftUI", "Swift", "macOS"],
     link: "https://github.com/Pallepadehat/Elbert",
     image: "/Elbert.png",
-    span: "col-span-1 md:col-span-2",
+    span: "col-span-1",
   },
   {
     title: "MarkdownEditor",
