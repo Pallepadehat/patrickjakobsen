@@ -49,6 +49,15 @@ const techStack = {
 
 const projects: Project[] = [
   {
+    title: "DockBricks",
+    description:
+      "A desktop app for creating and managing local container-backed databases with Docker or Podman.",
+    tech: ["Tauri", "React", "TypeScript", "Docker", "Podman"],
+    link: "https://github.com/Pallepadehat/DockBricks",
+    image: "/dockbricks.png",
+    span: "col-span-1 md:col-span-2",
+  },
+  {
     title: "Elbert",
     description:
       "A fast macOS launcher built with SwiftUI for apps, plugin commands, and fuzzy search.",
