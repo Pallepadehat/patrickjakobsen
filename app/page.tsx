@@ -214,7 +214,7 @@ export default function Home() {
                           src={item.icon}
                           alt={item.name}
                           fill
-                          className="object-contain grayscale brightness-0 opacity-70 dark:invert dark:opacity-80"
+                          className="object-contain grayscale opacity-75 dark:opacity-85"
                         />
                       </div>
                       <span className="text-sm font-medium">{item.name}</span>
