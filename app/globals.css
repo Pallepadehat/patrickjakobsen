@@ -4,14 +4,23 @@
 
 @layer base {
   :root {
-    /* Apple-like dark mode variables - Deep & Rich */
-    --background: 240 10% 3.9%; /* #09090b */
-    --foreground: 0 0% 98%; /* #fafafa */
-    --card: 240 10% 3.9%; /* Match background for seamless look */
-    --card-hover: 240 5.9% 10%; /* Slightly lighter */
-    --border: 240 3.7% 15.9%; /* Subtle border */
-    --muted: 240 3.8% 46.1%; /* Muted text */
-    --accent: 0 0% 100%; /* White accent */
+    --background: 220 20% 97%;
+    --foreground: 220 15% 14%;
+    --card: 0 0% 100%;
+    --card-hover: 220 20% 94%;
+    --border: 220 15% 88%;
+    --muted: 220 8% 45%;
+    --accent: 220 15% 14%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 5%;
+    --card-hover: 240 5.9% 10%;
+    --border: 240 3.7% 15.9%;
+    --muted: 240 3.8% 63%;
+    --accent: 0 0% 100%;
   }
 
   body {
@@ -28,11 +37,11 @@
 
 @layer utilities {
   .glass {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.1)];
+    @apply bg-card/80 backdrop-blur-xl border border-border shadow-[0_4px_30px_rgba(0,0,0,0.08)];
   }
 
   .glass-card {
-    @apply bg-neutral-900/50 backdrop-blur-md border border-white/5 hover:bg-neutral-800/50 transition-all duration-300;
+    @apply bg-card/70 backdrop-blur-md border border-border hover:bg-card-hover transition-all duration-300;
   }
 
   .text-balance {

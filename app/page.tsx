@@ -8,6 +8,7 @@ import {
   LinkedInIcon,
   LeetCodeIcon,
 } from "./components/social-icons";
+import { ThemeToggle } from "./components/theme-toggle";
 
 // --- Data ---
 
@@ -112,18 +113,18 @@ const timeline = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background text-foreground selection:bg-white/20 overflow-x-hidden">
+    <main className="min-h-screen bg-background text-foreground selection:bg-neutral-300/50 dark:selection:bg-white/20 overflow-x-hidden">
       <div className="max-w-3xl mx-auto px-6 sm:px-12 py-32 sm:py-48 space-y-40">
         {/* Header / Hero */}
         <section className="space-y-10 animate-fade-up">
           <div className="space-y-6">
-            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-white/95">
+            <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-foreground">
               Patrick Jakobsen
             </h1>
             <p className="text-xl sm:text-2xl text-muted font-medium max-w-2xl leading-relaxed text-balance">
               Full Stack Developer Student at Ordbogen A/S based in Denmark. I
-              build <span className="text-white/90">polished</span>,{" "}
-              <span className="text-white/90">performance-focused</span>{" "}
+              build <span className="text-foreground">polished</span>,{" "}
+              <span className="text-foreground">performance-focused</span>{" "}
               experiences across web, desktop, mobile, and backend.
             </p>
           </div>
@@ -173,17 +174,17 @@ export default function Home() {
             {timeline.map((item, i) => (
               <div
                 key={i}
-                className="group flex justify-between items-baseline border-b border-white/5 pb-4 hover:border-white/20 transition-colors duration-300"
+                className="group flex justify-between items-baseline border-b border-border pb-4 hover:border-muted/50 transition-colors duration-300"
               >
                 <div className="space-y-1">
-                  <h3 className="text-lg font-medium text-white/90 group-hover:text-white transition-colors">
+                  <h3 className="text-lg font-medium text-foreground group-hover:opacity-90 transition-colors">
                     {item.company}
                   </h3>
                   <p className="text-muted text-sm group-hover:text-muted/80 transition-colors">
                     {item.role}
                   </p>
                 </div>
-                <div className="text-sm text-white/20 font-mono group-hover:text-white/50 transition-colors">
+                <div className="text-sm text-muted/70 font-mono group-hover:text-muted transition-colors">
                   {item.period}
                 </div>
               </div>
@@ -206,14 +207,14 @@ export default function Home() {
                   {items.map((item) => (
                     <li
                       key={item.name}
-                      className="flex items-center gap-3 text-muted/60 hover:text-white transition-colors group"
+                      className="flex items-center gap-3 text-muted/80 hover:text-foreground transition-colors group"
                     >
                       <div className="w-4 h-4 relative opacity-60 group-hover:opacity-100 transition-opacity">
                         <Image
                           src={item.icon}
                           alt={item.name}
                           fill
-                          className="object-contain" // Removed brightness-0 invert
+                          className="object-contain grayscale brightness-0 opacity-70 dark:invert dark:opacity-80"
                         />
                       </div>
                       <span className="text-sm font-medium">{item.name}</span>
@@ -230,19 +231,20 @@ export default function Home() {
           className="pt-20 pb-12 animate-fade-up"
           style={{ animationDelay: "400ms" }}
         >
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-6 border-t border-white/5 pt-8">
-            <p className="text-sm text-white/20">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-6 border-t border-border pt-8">
+            <p className="text-sm text-muted/70">
               &copy; {new Date().getFullYear()} Patrick Jakobsen.
             </p>
             <Link
               href="mailto:contactpatrickjak@icloud.com"
-              className="text-sm font-medium text-muted hover:text-white transition-colors"
+              className="text-sm font-medium text-muted hover:text-foreground transition-colors"
             >
               Get in Touch &rarr;
             </Link>
           </div>
         </footer>
       </div>
+      <ThemeToggle />
     </main>
   );
 }
@@ -252,7 +254,7 @@ function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
     <Link
       href={href}
       target="_blank"
-      className="text-muted/60 hover:text-white transition-all duration-300 hover:scale-110"
+      className="text-muted hover:text-foreground transition-all duration-300 hover:scale-110"
     >
       {icon}
     </Link>
@@ -265,7 +267,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 + index * 0.1, duration: 0.5, ease: "easeOut" }}
-      className={`group relative overflow-hidden rounded-xl bg-neutral-900/30 border border-white/5 hover:border-white/10 transition-all duration-500 ${project.span || "col-span-1"}`}
+      className={`group relative overflow-hidden rounded-xl bg-card/70 border border-border hover:border-muted/50 transition-all duration-500 ${project.span || "col-span-1"}`}
     >
       <Link
         href={project.link}
@@ -275,18 +277,18 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         <div
           className={`relative w-full overflow-hidden ${project.span?.includes("md:col-span-2") ? "h-64 sm:h-96" : "h-48"}`}
         >
-          <div className="absolute inset-0 bg-black/20 z-10 group-hover:bg-transparent transition-colors duration-500" />
+          <div className="absolute inset-0 bg-black/10 dark:bg-black/25 z-10 group-hover:bg-transparent transition-colors duration-500" />
           <Image
             src={project.image}
             alt={project.title}
             fill
-            className="object-cover object-top transform group-hover:scale-105 transition-transform duration-700 ease-apple grayscale group-hover:grayscale-0"
+            className="object-cover object-top transform group-hover:scale-105 transition-transform duration-700 ease-apple grayscale-[0.15] group-hover:grayscale-0"
           />
         </div>
 
-        <div className="p-5 flex-1 flex flex-col justify-between bg-gradient-to-b from-transparent to-black/40">
+        <div className="p-5 flex-1 flex flex-col justify-between bg-gradient-to-b from-transparent to-card">
           <div>
-            <h3 className="text-lg font-semibold text-white/90 group-hover:text-white transition-colors mb-2">
+            <h3 className="text-lg font-semibold text-foreground transition-colors mb-2">
               {project.title}
             </h3>
             <p className="text-sm text-muted line-clamp-2 leading-relaxed">
@@ -297,7 +299,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             {project.tech.map((t) => (
               <span
                 key={t}
-                className="text-[10px] text-white/40 bg-white/5 px-2 py-1 rounded border border-white/5"
+                className="text-[10px] text-muted bg-card-hover/70 px-2 py-1 rounded border border-border"
               >
                 {t}
               </span>
