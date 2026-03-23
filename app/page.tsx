@@ -104,7 +104,7 @@ const timeline = [
   },
   {
     company: "ZBC Ringsted",
-    role: "Programming Technician",
+    role: "Data Technician (Programming Specialization)",
     period: "2022 - 2027",
   },
 ];
